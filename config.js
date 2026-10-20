@@ -20,5 +20,16 @@ window.CONFIG = {
   },
   // Deixe null para "consultar no atendimento". Ex.: 5 para R$ 5,00
   taxaEntrega: null,
+  // Taxa por bairro (sobrepõe a taxa acima). Ex.: { "Centro": 5, "Jardim Alvorada": 8 }
+  bairros: {},
+  // Pedido mínimo em reais. Deixe null para não exigir.
+  pedidoMinimo: null,
+  // Troque para true para mostrar "fechado" mesmo dentro do horário (feriado, imprevisto)
+  lojaFechadaManual: false,
+  mensagemFechada: "Fechado temporariamente",
+  // Números dos sabores sem estoque hoje. Ex.: [7, 12]
+  indisponiveis: [],
+  // Sugerir bebidas no carrinho
+  sugerirBebidas: true,
   pagamentos: ["Pix", "Cartão de crédito", "Cartão de débito", "Dinheiro"]
 };

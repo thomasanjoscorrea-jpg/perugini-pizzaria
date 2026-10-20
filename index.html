@@ -2,10 +2,11 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pizzaria Perugini | A pizza de respeito - Sarandi/PR</title>
 <meta name="description" content="Peça pizza online na Pizzaria Perugini, em Sarandi/PR. Cardápio completo, horário de funcionamento e pedido pelo WhatsApp. Terça a domingo, das 18:00 às 23:30.">
 <meta name="theme-color" content="#0d0d0d">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/logo.webp">
 <link rel="apple-touch-icon" href="assets/logo.webp">
 <meta property="og:type" content="restaurant.restaurant">
@@ -20,12 +21,15 @@
 "address":{"@type":"PostalAddress","streetAddress":"Rua José Munhoz, 370","addressLocality":"Sarandi","addressRegion":"PR","addressCountry":"BR"},
 "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"18:00","closes":"23:30"}]}
 </script>
+<link rel="preload" as="image" href="assets/img/hero.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
+
 <a class="skip" href="#cardapio">Ir para o cardápio</a>
 <div class="progress" id="progress" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
@@ -48,17 +52,18 @@
       <a href="#faq">Dúvidas</a>
       <a href="#contato">Contato</a>
     </nav>
-    <button class="cart-btn" id="openCart" aria-label="Abrir carrinho">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+    <button class="cart-btn" id="openCart" type="button" aria-label="Abrir carrinho">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
       <span class="cart-count" id="cartCount">0</span>
       <span class="cart-total-h" id="cartTotalH">R$ 0,00</span>
     </button>
-    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
   </div>
 </header>
 
 <main>
 <section class="hero" id="inicio">
+  <canvas class="embers" id="embers" aria-hidden="true"></canvas>
   <div class="wrap hero-in">
     <div class="hero-text">
       <p class="eyebrow">Sarandi · Paraná</p>
@@ -76,11 +81,19 @@
     </div>
     <div class="hero-logo">
       <div class="hero-glow" aria-hidden="true"></div>
-      <img class="hero-photo" src="assets/img/hero.jpg" alt="Pizza artesanal da Perugini" width="560" height="560">
+      <img class="hero-photo" src="assets/img/hero.jpg" alt="Pizza artesanal da Perugini" width="560" height="560" fetchpriority="high" decoding="async">
       <img class="hero-badge" src="assets/logo.webp" alt="Pizzaria Perugini - A pizza de respeito" width="130" height="130">
     </div>
   </div>
+  <a class="scroll-hint" href="#cardapio" aria-label="Rolar para o cardápio"><span></span></a>
 </section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>61 sabores</span><span>Borda recheada</span><span>Meia a meia</span><span>Pedido pelo WhatsApp</span><span>Terça a domingo · 18h às 23h30</span>
+    <span>61 sabores</span><span>Borda recheada</span><span>Meia a meia</span><span>Pedido pelo WhatsApp</span><span>Terça a domingo · 18h às 23h30</span>
+  </div>
+</div>
 
 <section class="promos wrap" aria-label="Destaques">
   <div class="promo reveal"><span class="ico">🍕</span><div><b>Tradicionais a partir de R$ 45,90</b><small>16 sabores clássicos</small></div></div>
@@ -97,20 +110,20 @@
       <p class="sub">Toque em um sabor para escolher tamanho, borda e quantidade.</p>
     </div>
 
-    <div class="sizes-info">
+    <div class="sizes-info reveal">
       <div><b>Pequena</b><span>4 pedaços</span></div>
       <div><b>Média</b><span>6 pedaços · até 2 sabores</span></div>
       <div><b>Grande</b><span>8 pedaços · até 2 sabores</span></div>
     </div>
 
     <div class="menu-tools">
-      <div class="tabs" id="tabs" role="tablist"></div>
+      <div class="tabs" id="tabs" role="tablist" aria-label="Categorias do cardápio"></div>
       <label class="search"><span class="sr">Buscar sabor</span>
         <input id="search" type="search" placeholder="Buscar sabor ou ingrediente (ex.: calabresa, bacon)" autocomplete="off">
       </label>
     </div>
 
-    <div id="menuGrid" class="grid"></div>
+    <div id="menuGrid" class="grid" aria-live="polite"></div>
     <p class="empty" id="empty" hidden>Nenhum sabor encontrado. Tente outra palavra.</p>
   </div>
 </section>
@@ -129,14 +142,14 @@
 
 <section class="section" id="horarios">
   <div class="wrap two">
-    <div>
+    <div class="reveal">
       <p class="eyebrow">Funcionamento</p>
       <h2>Horários</h2>
       <div class="status-card" id="statusCard"></div>
       <table class="hours" id="hoursTable"><caption class="sr">Horários de funcionamento</caption><tbody></tbody></table>
       <p class="note">Horário de Brasília. Fechamos toda segunda-feira. Feriados: confira nosso Instagram.</p>
     </div>
-    <div>
+    <div class="reveal">
       <p class="eyebrow">Onde estamos</p>
       <h2>Endereço e entrega</h2>
       <ul class="info-list">
@@ -145,7 +158,8 @@
         <li><b>🏪 Retirada</b><span>Retire na pizzaria sem taxa de entrega.</span></li>
         <li><b>💳 Pagamento</b><span id="payList"></span></li>
       </ul>
-      <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rua+Jos%C3%A9+Munhoz+370+Sarandi+PR">Abrir no Google Maps</a>
+      <div class="map"><iframe title="Mapa da Pizzaria Perugini" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Rua+Jos%C3%A9+Munhoz+370+Sarandi+PR&amp;output=embed"></iframe></div>
+      <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Jos%C3%A9+Munhoz+370+Sarandi+PR">Abrir no Google Maps</a>
     </div>
   </div>
 </section>
@@ -168,8 +182,8 @@
 </section>
 
 <section class="section" id="contato">
-  <div class="wrap contact">
-    <img src="assets/logo.webp" alt="" width="140" height="140" class="contact-logo">
+  <div class="wrap contact reveal">
+    <img src="assets/logo.webp" alt="" width="140" height="140" class="contact-logo" loading="lazy">
     <div>
       <p class="eyebrow">Fale com a gente</p>
       <h2>Contato</h2>
@@ -193,20 +207,20 @@
   </div>
 </footer>
 
-<button class="to-top" id="toTop" aria-label="Voltar ao topo" hidden>↑</button>
+<button class="to-top" id="toTop" type="button" aria-label="Voltar ao topo" hidden>↑</button>
 
 <a class="wa-float" id="waFloat" target="_blank" rel="noopener" href="#" aria-label="Falar no WhatsApp">
-  <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff"><path d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2c1.8 1 3.800 1.500 5.600 1.500 7 0 12.600-5.600 12.600-12.500S23 3 16 3zm0 22.800c-1.800 0-3.500-.5-5-1.400l-.4-.2-4.400 1.200 1.200-4.300-.3-.4a10 10 0 0 1-1.500-5.300C5.600 9.900 10.300 5.300 16 5.300s10.400 4.600 10.400 10.300S21.700 25.800 16 25.800zm5.700-7.500c-.3-.2-1.800-.9-2.100-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100c-1.900-.9-3.100-1.700-4.300-3.800-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-.9-2.200c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1 1-1 2.400 1 2.800 1.200 3c.2.2 2.100 3.200 5.100 4.500 1.900.8 2.600.9 3.600.7.600-.1 1.800-.7 2.100-1.500s.3-1.400.2-1.500-.3-.2-.6-.3z"/></svg>
+  <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff" aria-hidden="true"><path d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2c1.8 1 3.800 1.500 5.600 1.500 7 0 12.600-5.600 12.600-12.500S23 3 16 3zm0 22.800c-1.800 0-3.500-.5-5-1.400l-.4-.2-4.400 1.200 1.200-4.300-.3-.4a10 10 0 0 1-1.500-5.300C5.600 9.900 10.300 5.300 16 5.300s10.400 4.600 10.400 10.300S21.700 25.800 16 25.800zm5.700-7.500c-.3-.2-1.800-.9-2.100-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100c-1.900-.9-3.100-1.700-4.300-3.800-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-.9-2.200c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1 1-1 2.400 1 2.800 1.200 3c.2.2 2.100 3.200 5.100 4.500 1.900.8 2.600.9 3.600.7.600-.1 1.800-.7 2.100-1.500s.3-1.400.2-1.500-.3-.2-.6-.3z"/></svg>
 </a>
 
 <div class="mini-cart" id="miniCart" hidden>
-  <button id="miniOpen" class="btn btn-red"><span id="miniCount">0 itens</span> · <b id="miniTotal">R$ 0,00</b> · Ver pedido</button>
+  <button id="miniOpen" type="button" class="btn btn-red"><span id="miniCount">0 itens</span> · <b id="miniTotal">R$ 0,00</b> · Ver pedido</button>
 </div>
 
 <!-- Modal de produto -->
 <div class="overlay" id="overlay" hidden></div>
 <div class="modal" id="modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="mTitle" hidden>
-  <button class="x" id="mClose" aria-label="Fechar">×</button>
+  <button class="x" id="mClose" type="button" aria-label="Fechar">×</button>
   <h3 id="mTitle"></h3>
   <p class="m-desc" id="mDesc"></p>
   <div class="field"><label>Tamanho</label><div class="opts" id="mSizes"></div></div>
@@ -221,32 +235,33 @@
   </div>
   <div class="field"><label for="mObs">Observações (opcional)</label><input id="mObs" type="text" maxlength="120" placeholder="Ex.: sem cebola, bem passada..."></div>
   <div class="m-foot">
-    <div class="qty"><button id="mMinus" aria-label="Diminuir">−</button><span id="mQty">1</span><button id="mPlus" aria-label="Aumentar">+</button></div>
-    <button class="btn btn-red" id="mAdd">Adicionar · <b id="mPrice"></b></button>
+    <div class="qty"><button type="button" id="mMinus" aria-label="Diminuir">−</button><span id="mQty">1</span><button type="button" id="mPlus" aria-label="Aumentar">+</button></div>
+    <button class="btn btn-red" id="mAdd" type="button">Adicionar · <b id="mPrice"></b></button>
   </div>
 </div>
 
 <!-- Carrinho -->
 <aside class="drawer" id="drawer" tabindex="-1" role="dialog" aria-modal="true" aria-label="Seu pedido" hidden>
-  <div class="drawer-head"><h3>Seu pedido</h3><button class="x" id="cClose" aria-label="Fechar">×</button></div>
+  <div class="drawer-head"><h3>Seu pedido</h3><button class="x" id="cClose" type="button" aria-label="Fechar">×</button></div>
   <div class="drawer-body">
     <div id="cartList"></div>
     <p class="empty" id="cartEmpty">Seu carrinho está vazio. Escolha uma pizza no cardápio.</p>
+    <div class="upsell" id="cUpsell" hidden></div>
 
     <div id="checkout" hidden>
       <h4>Dados do pedido</h4>
       <div class="field"><label for="fNome">Seu nome *</label><input id="fNome" autocomplete="name"></div>
-      <div class="field"><label for="fTel">Telefone / WhatsApp *</label><input id="fTel" inputmode="tel" autocomplete="tel" placeholder="(44) 90000-0000"></div>
+      <div class="field"><label for="fTel">Telefone / WhatsApp *</label><input id="fTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(44) 90000-0000"></div>
       <div class="field"><label>Como deseja receber?</label>
         <div class="opts" id="fTipo">
-          <button type="button" class="opt on" data-v="Entrega">🛵 Entrega</button>
-          <button type="button" class="opt" data-v="Retirada">🏪 Retirada</button>
+          <button type="button" class="opt on" aria-pressed="true" data-v="Entrega">🛵 Entrega</button>
+          <button type="button" class="opt" aria-pressed="false" data-v="Retirada">🏪 Retirada</button>
         </div>
       </div>
       <div id="addrBox">
         <div class="field"><label for="fRua">Rua e número *</label><input id="fRua" autocomplete="street-address"></div>
         <div class="row2">
-          <div class="field"><label for="fBairro">Bairro *</label><input id="fBairro"></div>
+          <div class="field"><label for="fBairro">Bairro *</label><input id="fBairro" list="bairrosList" autocomplete="off"><datalist id="bairrosList"></datalist></div>
           <div class="field"><label for="fComp">Complemento</label><input id="fComp"></div>
         </div>
         <div class="field"><label for="fRef">Ponto de referência</label><input id="fRef"></div>
@@ -255,18 +270,25 @@
       <div class="field" id="trocoBox" hidden><label for="fTroco">Troco para quanto?</label><input id="fTroco" inputmode="decimal" placeholder="Ex.: 100 (ou 'não preciso')"></div>
       <div class="field"><label for="fObs">Observações do pedido</label><textarea id="fObs" rows="2" placeholder="Alergias, instruções para o entregador..."></textarea></div>
     </div>
+
+    <div class="done" id="cDone" hidden>
+      <b>✅ Pedido montado no WhatsApp!</b>
+      <p>Falta só tocar em <em>Enviar</em> na conversa que abriu. Confirmamos o valor final e o tempo de entrega por lá.</p>
+      <button type="button" class="btn btn-ghost full" id="cNew">Fazer um novo pedido</button>
+    </div>
   </div>
   <div class="drawer-foot" id="cFoot" hidden>
     <div class="tot"><span>Subtotal</span><b id="cSub">R$ 0,00</b></div>
     <p class="note" id="cNote">Taxa de entrega informada no atendimento.</p>
+    <p class="warn" id="cMin" hidden></p>
     <p class="warn" id="cWarn" hidden></p>
-    <button class="btn btn-green full" id="cSend">Enviar pedido pelo WhatsApp</button>
-    <button class="link" id="cClear">Limpar carrinho</button>
+    <button class="btn btn-green full" id="cSend" type="button">Enviar pedido pelo WhatsApp</button>
+    <button class="link" id="cClear" type="button">Limpar carrinho</button>
   </div>
 </aside>
 
 <script src="config.js"></script>
 <script src="menu-data.js"></script>
-<script src="app.js" defer></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
