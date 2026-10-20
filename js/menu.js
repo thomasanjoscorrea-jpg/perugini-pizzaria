@@ -15,7 +15,7 @@ function renderTabs() {
   abas.forEach(a => {
     const b = document.createElement("button"), on = a.id === aba && !busca;
     b.type = "button"; b.className = "tab" + (on ? " on" : ""); b.textContent = a.nome;
-    b.setAttribute("role", "tab"); b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1;
+    b.setAttribute("aria-pressed", on);
     b.onclick = () => { aba = a.id; busca = ""; $("#search").value = ""; render(); };
     t.appendChild(b);
   });
@@ -27,7 +27,7 @@ function pizzaCard(p) {
   b.style.animationDelay = Math.min(atraso++ * 30, 360) + "ms";
   const img = `assets/img/${PRE[p.cat.id]}${(p.n % 4) + 1}.jpg`;
   b.innerHTML = `<div class="ph"><img loading="lazy" decoding="async" width="400" height="300" src="${img}" alt="Pizza ${esc(p.nome)}"><span class="num">Nº ${p.n}</span>${off ? '<span class="badge-off">Indisponível</span>' : ""}</div>
-    <h4>${esc(p.nome)}</h4><p>${esc(p.ing)}</p>
+    <h3>${esc(p.nome)}</h3><p>${esc(p.ing)}</p>
     <div class="prices">${Object.entries(p.cat.precos).map(([k, v]) => `<span>${k} <b>${money(v)}</b></span>`).join("")}</div>
     <span class="add">${off ? "Volte em breve" : "+ Escolher"}</span>`;
   if (!off) b.onclick = () => handlers.pizza(p);

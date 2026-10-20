@@ -4,13 +4,13 @@
 :root{
   --bg:#0b0b0c; --bg2:#141415; --card:#1b1b1d; --card2:#232326; --line:#2c2c30;
   --txt:#f4f1ea; --mut:#a9a49a;
-  --red:#d62920; --red2:#b01e17; --yellow:#f6c21c; --green:#1f9d4a; --green2:#188139;
+  --red:#d62920; --red2:#b01e17; --yellow:#f6c21c; --green:#1a8a40; --green2:#146f33;
   --r:16px; --ease:cubic-bezier(.2,.7,.2,1);
-  --glass:rgba(20,20,22,.72);
+  --glass:rgba(20,20,22,.72); color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:110px;-webkit-text-size-adjust:100%}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:110px;-webkit-text-size-adjust:100%}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.55;-webkit-font-smoothing:antialiased}
 body.lock{overflow:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -151,7 +151,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--yellow);outline-
 .card .num{position:absolute;left:10px;top:10px;z-index:1;font:400 15px "Bebas Neue";background:var(--red);color:#fff;border-radius:6px;padding:1px 9px;letter-spacing:1px}
 .card .badge-off{position:absolute;right:10px;top:10px;z-index:1;font-size:11px;font-weight:700;background:#000;color:#fff;border-radius:99px;padding:3px 10px}
 .card.off{opacity:.55;cursor:not-allowed;filter:grayscale(.7)}
-.card h4{font-size:17px}
+.card h3{font:700 17px Inter;letter-spacing:0}
 .card p{color:var(--mut);font-size:13px;flex:1}
 .card .prices{display:flex;gap:6px;flex-wrap:wrap}
 .card .prices span{background:#111;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:12px;color:var(--mut)}
@@ -232,7 +232,7 @@ details a{color:var(--yellow)}
 @keyframes pop{from{opacity:0;transform:translate(-50%,-46%) scale(.96)}}
 @keyframes slide{from{transform:translateX(100%)}}
 .field{margin-bottom:14px}
-.field>label,.field label.check{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+.field>label,.field>.lbl,.field label.check{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
 .field label.check{display:flex;gap:8px;align-items:center;cursor:pointer}
 input[type=checkbox]{accent-color:var(--red);width:18px;height:18px}
 input[type=text],input:not([type]),input[type=search],input[type=tel],select,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--txt);font:500 15px Inter}
@@ -310,4 +310,40 @@ input.err,select.err{outline:2px solid var(--red)}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .js .reveal{opacity:1;transform:none}
+}
+
+/* ===== refinamentos (acessibilidade, toque, iOS, notch) ===== */
+.field>.lbl{display:block}
+.topbar{padding-top:calc(9px + env(safe-area-inset-top))}
+h1,h2,h3{text-wrap:balance}
+p,.lead,.sub{text-wrap:pretty}
+/* sem suporte a texto com degradê: cor sólida */
+@supports not ((background-clip:text) or (-webkit-background-clip:text)){h1 em{color:var(--red);background:none}}
+/* áreas de toque confortáveis (mínimo ~40px) */
+.x{width:44px;height:44px;display:grid;place-items:center;top:8px;right:8px;border-radius:50%}
+.x:hover{background:var(--card)}
+.drawer-head .x{top:auto;right:auto}
+.qty button{width:40px;height:40px}
+.ci .qty button{width:36px;height:36px}
+.drink button{width:40px;height:40px}
+.ci .rm{padding:8px 4px}
+.link{padding:8px}
+/* títulos centralizados também centralizam o traço */
+.contact h2::after{margin-inline:0}
+@media(max-width:900px){.contact h2::after{margin-inline:auto}}
+/* barras de rolagem discretas */
+*{scrollbar-width:thin;scrollbar-color:#3a3a3f transparent}
+.tabs{scrollbar-width:none}
+/* iOS: campos com 16px evitam o zoom automático */
+@media(max-width:900px){
+  input[type=text],input:not([type]),input[type=search],input[type=tel],select,textarea,.search input{font-size:16px}
+}
+/* telas baixas: esconde a dica de rolagem */
+@media(max-height:720px){.scroll-hint{display:none}}
+/* pessoas com contraste alto */
+@media(forced-colors:active){.btn,.tab,.opt,.card{border:1px solid ButtonText}}
+/* impressão: só o essencial */
+@media print{
+  .topbar,.header,.ticker,.hero-glow,.embers,.wa-float,.mini-cart,.to-top,.progress,.menu-tools,.map,.scroll-hint{display:none!important}
+  body{background:#fff;color:#000}.js .reveal{opacity:1;transform:none}
 }

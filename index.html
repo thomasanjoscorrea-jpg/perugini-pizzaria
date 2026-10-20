@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pizzaria Perugini | A pizza de respeito - Sarandi/PR</title>
 <meta name="description" content="Peça pizza online na Pizzaria Perugini, em Sarandi/PR. Cardápio completo, horário de funcionamento e pedido pelo WhatsApp. Terça a domingo, das 18:00 às 23:30.">
-<meta name="theme-color" content="#0d0d0d">
+<meta name="theme-color" content="#0b0b0c">
+<meta name="color-scheme" content="dark">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/logo.webp">
 <link rel="apple-touch-icon" href="assets/logo.webp">
@@ -117,13 +118,14 @@
     </div>
 
     <div class="menu-tools">
-      <div class="tabs" id="tabs" role="tablist" aria-label="Categorias do cardápio"></div>
+      <div class="tabs" id="tabs" role="group" aria-label="Categorias do cardápio"></div>
       <label class="search"><span class="sr">Buscar sabor</span>
         <input id="search" type="search" placeholder="Buscar sabor ou ingrediente (ex.: calabresa, bacon)" autocomplete="off">
       </label>
     </div>
 
     <div id="menuGrid" class="grid" aria-live="polite"></div>
+    <noscript><p class="empty">Ative o JavaScript para ver o cardápio, ou chame a gente no WhatsApp: (44) 99838-2025.</p></noscript>
     <p class="empty" id="empty" hidden>Nenhum sabor encontrado. Tente outra palavra.</p>
   </div>
 </section>
@@ -223,7 +225,7 @@
   <button class="x" id="mClose" type="button" aria-label="Fechar">×</button>
   <h3 id="mTitle"></h3>
   <p class="m-desc" id="mDesc"></p>
-  <div class="field"><label>Tamanho</label><div class="opts" id="mSizes"></div></div>
+  <div class="field"><span class="lbl" id="lTam">Tamanho</span><div class="opts" id="mSizes" role="group" aria-labelledby="lTam"></div></div>
   <div class="field" id="mHalfBox">
     <label class="check"><input type="checkbox" id="mHalf"> Meia a meia (2 sabores)</label>
     <select id="mSecond" hidden aria-label="Segundo sabor"></select>
@@ -250,21 +252,21 @@
 
     <div id="checkout" hidden>
       <h4>Dados do pedido</h4>
-      <div class="field"><label for="fNome">Seu nome *</label><input id="fNome" autocomplete="name"></div>
+      <div class="field"><label for="fNome">Seu nome *</label><input id="fNome" name="nome" autocomplete="name" autocapitalize="words" enterkeyhint="next"></div>
       <div class="field"><label for="fTel">Telefone / WhatsApp *</label><input id="fTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(44) 90000-0000"></div>
-      <div class="field"><label>Como deseja receber?</label>
-        <div class="opts" id="fTipo">
+      <div class="field"><span class="lbl" id="lTipo">Como deseja receber?</span>
+        <div class="opts" id="fTipo" role="group" aria-labelledby="lTipo">
           <button type="button" class="opt on" aria-pressed="true" data-v="Entrega">🛵 Entrega</button>
           <button type="button" class="opt" aria-pressed="false" data-v="Retirada">🏪 Retirada</button>
         </div>
       </div>
       <div id="addrBox">
-        <div class="field"><label for="fRua">Rua e número *</label><input id="fRua" autocomplete="street-address"></div>
+        <div class="field"><label for="fRua">Rua e número *</label><input id="fRua" name="rua" autocomplete="address-line1" autocapitalize="words" enterkeyhint="next"></div>
         <div class="row2">
           <div class="field"><label for="fBairro">Bairro *</label><input id="fBairro" list="bairrosList" autocomplete="off"><datalist id="bairrosList"></datalist></div>
-          <div class="field"><label for="fComp">Complemento</label><input id="fComp"></div>
+          <div class="field"><label for="fComp">Complemento</label><input id="fComp" name="complemento" autocomplete="address-line2"></div>
         </div>
-        <div class="field"><label for="fRef">Ponto de referência</label><input id="fRef"></div>
+        <div class="field"><label for="fRef">Ponto de referência</label><input id="fRef" name="referencia" autocomplete="off"></div>
       </div>
       <div class="field"><label for="fPag">Forma de pagamento *</label><select id="fPag"></select></div>
       <div class="field" id="trocoBox" hidden><label for="fTroco">Troco para quanto?</label><input id="fTroco" inputmode="decimal" placeholder="Ex.: 100 (ou 'não preciso')"></div>
