@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pizzaria Perugini | A pizza de respeito - Sarandi/PR</title>
+<meta name="description" content="Peça pizza online na Pizzaria Perugini, em Sarandi/PR. Cardápio completo, horário de funcionamento e pedido pelo WhatsApp. Terça a domingo, das 18:00 às 23:30.">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="icon" href="assets/logo.webp">
+<link rel="apple-touch-icon" href="assets/logo.webp">
+<meta property="og:type" content="restaurant.restaurant">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Pizzaria Perugini">
+<meta property="og:title" content="Pizzaria Perugini | A pizza de respeito - Sarandi/PR">
+<meta property="og:description" content="61 sabores, borda recheada e pedido direto pelo WhatsApp. Terça a domingo, das 18:00 às 23:30.">
+<meta property="og:image" content="assets/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"Pizzaria Perugini","servesCuisine":"Pizza","telephone":"+55 44 99838-2025","image":"assets/img/hero.jpg","sameAs":["https://instagram.com/peruginipizzaria"],
+"address":{"@type":"PostalAddress","streetAddress":"Rua José Munhoz, 370","addressLocality":"Sarandi","addressRegion":"PR","addressCountry":"BR"},
+"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"18:00","closes":"23:30"}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#cardapio">Ir para o cardápio</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<div class="topbar" id="topbar" role="status" aria-live="polite">
+  <span class="dot"></span><span id="statusText">Verificando horário...</span>
+</div>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a href="#inicio" class="brand" aria-label="Perugini - início">
+      <img src="assets/logo.webp" alt="Logo Pizzaria Perugini" width="56" height="56">
+      <span><b>PERUGINI</b><small>A pizza de respeito</small></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Menu principal">
+      <a href="#inicio" class="on">Home</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#como-pedir">Como pedir</a>
+      <a href="#horarios">Horários</a>
+      <a href="#faq">Dúvidas</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <button class="cart-btn" id="openCart" aria-label="Abrir carrinho">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+      <span class="cart-total-h" id="cartTotalH">R$ 0,00</span>
+    </button>
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap hero-in">
+    <div class="hero-text">
+      <p class="eyebrow">Sarandi · Paraná</p>
+      <h1>A pizza<br>de <em>respeito</em></h1>
+      <p class="lead">Conectando a você a melhor pizza. 61 sabores, borda recheada e pedido direto pelo WhatsApp.</p>
+      <div class="hero-cta">
+        <a class="btn btn-red" href="#cardapio">Ver cardápio e pedir</a>
+        <a class="btn btn-ghost" href="#horarios">Horário de funcionamento</a>
+      </div>
+      <ul class="hero-facts">
+        <li><b data-count="61">61</b> sabores</li>
+        <li><b data-count="3">3</b> tamanhos</li>
+        <li><b data-count="8">8</b> bordas recheadas</li>
+      </ul>
+    </div>
+    <div class="hero-logo">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <img class="hero-photo" src="assets/img/hero.jpg" alt="Pizza artesanal da Perugini" width="560" height="560">
+      <img class="hero-badge" src="assets/logo.webp" alt="Pizzaria Perugini - A pizza de respeito" width="130" height="130">
+    </div>
+  </div>
+</section>
+
+<section class="promos wrap" aria-label="Destaques">
+  <div class="promo reveal"><span class="ico">🍕</span><div><b>Tradicionais a partir de R$ 45,90</b><small>16 sabores clássicos</small></div></div>
+  <div class="promo reveal"><span class="ico">🧀</span><div><b>Borda recheada</b><small>Requeijão, cheddar, chocolate e mais</small></div></div>
+  <div class="promo reveal"><span class="ico">✂️</span><div><b>2 sabores na mesma pizza</b><small>Nos tamanhos Média e Grande</small></div></div>
+  <div class="promo reveal"><span class="ico">📲</span><div><b>Peça pelo WhatsApp</b><small>Monte aqui, envie com 1 clique</small></div></div>
+</section>
+
+<section class="section" id="cardapio">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Cardápio</p>
+      <h2>Escolha sua pizza</h2>
+      <p class="sub">Toque em um sabor para escolher tamanho, borda e quantidade.</p>
+    </div>
+
+    <div class="sizes-info">
+      <div><b>Pequena</b><span>4 pedaços</span></div>
+      <div><b>Média</b><span>6 pedaços · até 2 sabores</span></div>
+      <div><b>Grande</b><span>8 pedaços · até 2 sabores</span></div>
+    </div>
+
+    <div class="menu-tools">
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <label class="search"><span class="sr">Buscar sabor</span>
+        <input id="search" type="search" placeholder="Buscar sabor ou ingrediente (ex.: calabresa, bacon)" autocomplete="off">
+      </label>
+    </div>
+
+    <div id="menuGrid" class="grid"></div>
+    <p class="empty" id="empty" hidden>Nenhum sabor encontrado. Tente outra palavra.</p>
+  </div>
+</section>
+
+<section class="section dark" id="como-pedir">
+  <div class="wrap">
+    <div class="sec-head reveal"><p class="eyebrow">Passo a passo</p><h2>Como pedir</h2></div>
+    <ol class="steps">
+      <li class="reveal"><b>1</b><h3>Escolha</h3><p>Navegue pelo cardápio e toque no sabor desejado.</p></li>
+      <li class="reveal"><b>2</b><h3>Monte</h3><p>Defina tamanho, borda recheada, meia a meia e quantidade.</p></li>
+      <li class="reveal"><b>3</b><h3>Informe os dados</h3><p>Nome, endereço (ou retirada) e forma de pagamento.</p></li>
+      <li class="reveal"><b>4</b><h3>Envie pelo WhatsApp</h3><p>Seu pedido completo chega pronto até nós. Confirmamos o valor final e o tempo.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="horarios">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow">Funcionamento</p>
+      <h2>Horários</h2>
+      <div class="status-card" id="statusCard"></div>
+      <table class="hours" id="hoursTable"><caption class="sr">Horários de funcionamento</caption><tbody></tbody></table>
+      <p class="note">Horário de Brasília. Fechamos toda segunda-feira. Feriados: confira nosso Instagram.</p>
+    </div>
+    <div>
+      <p class="eyebrow">Onde estamos</p>
+      <h2>Endereço e entrega</h2>
+      <ul class="info-list">
+        <li><b>📍 Endereço</b><span>Rua José Munhoz, 370 - Sarandi/PR</span></li>
+        <li><b>🛵 Entrega</b><span>Entregamos em Sarandi. Taxa e tempo informados no atendimento, conforme o seu bairro.</span></li>
+        <li><b>🏪 Retirada</b><span>Retire na pizzaria sem taxa de entrega.</span></li>
+        <li><b>💳 Pagamento</b><span id="payList"></span></li>
+      </ul>
+      <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rua+Jos%C3%A9+Munhoz+370+Sarandi+PR">Abrir no Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="faq">
+  <div class="wrap narrow">
+    <div class="sec-head reveal"><p class="eyebrow">Dúvidas frequentes</p><h2>Perguntas e respostas</h2></div>
+    <details class="reveal"><summary>Qual o horário de funcionamento?</summary><p>De terça a domingo, das 18:00 às 23:30. Fechamos às segundas-feiras. Acima da página você vê se estamos abertos agora.</p></details>
+    <details class="reveal"><summary>Vocês entregam no meu endereço?</summary><p>Entregamos em Sarandi/PR. Ao enviar o pedido pelo WhatsApp, confirmamos se o seu endereço está na área e informamos a taxa e o tempo.</p></details>
+    <details class="reveal"><summary>Qual a taxa de entrega?</summary><p>A taxa varia conforme o bairro e é informada por nós antes de fechar o pedido. Na retirada não há taxa.</p></details>
+    <details class="reveal"><summary>Quantos pedaços tem cada tamanho?</summary><p>Pequena: 4 pedaços. Média: 6 pedaços. Grande: 8 pedaços.</p></details>
+    <details class="reveal"><summary>Posso pedir meia a meia?</summary><p>Sim. Nas pizzas Média e Grande você pode escolher 2 sabores. O valor cobrado é o do sabor de maior preço entre os dois.</p></details>
+    <details class="reveal"><summary>Como funciona a borda recheada?</summary><p>Adicional de R$ 12,00 (P), R$ 14,00 (M) ou R$ 16,00 (G). Sabores: requeijão, cheddar, mussarela, cream cheese, chocolate branco, doce de leite, goiabada e chocolate ao leite.</p></details>
+    <details class="reveal"><summary>Quais as formas de pagamento?</summary><p>Pix, cartão de crédito, cartão de débito e dinheiro. Se for pagar em dinheiro, informe o valor para o troco ao fazer o pedido.</p></details>
+    <details class="reveal"><summary>Posso retirar na pizzaria?</summary><p>Pode. Escolha "Retirada" no pedido e passe na Rua José Munhoz, 370 dentro do horário de funcionamento.</p></details>
+    <details class="reveal"><summary>Posso pedir fora do horário?</summary><p>Você pode montar o pedido a qualquer hora, mas ele só será atendido quando estivermos abertos.</p></details>
+    <details class="reveal"><summary>Tem opção sem glúten ou para alérgicos?</summary><p>Nossas pizzas contêm glúten e podem conter leite, ovo, trigo e soja. Se tiver alergia, avise no campo de observações ou fale com a gente antes de pedir.</p></details>
+    <details class="reveal"><summary>Como acompanho meu pedido?</summary><p>Pelo mesmo WhatsApp em que enviou o pedido: <a href="#contato">(44) 99838-2025</a>.</p></details>
+  </div>
+</section>
+
+<section class="section" id="contato">
+  <div class="wrap contact">
+    <img src="assets/logo.webp" alt="" width="140" height="140" class="contact-logo">
+    <div>
+      <p class="eyebrow">Fale com a gente</p>
+      <h2>Contato</h2>
+      <p>🛎 Conectando a você a melhor pizza</p>
+      <p>📱 <a id="telLink" href="tel:+5544998382025">(44) 99838-2025</a></p>
+      <p>📍 Rua José Munhoz, 370 - Sarandi/PR</p>
+      <p>⏰ Terça a domingo, das 18:00 às 23:30</p>
+      <div class="hero-cta">
+        <a class="btn btn-green" id="waLink" target="_blank" rel="noopener" href="#">Chamar no WhatsApp</a>
+        <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://instagram.com/peruginipizzaria">@peruginipizzaria</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p><b>Pizzaria Perugini</b> · Rua José Munhoz, 370 · Sarandi/PR · (44) 99838-2025</p>
+    <p class="small">Imagens meramente ilustrativas. Todos os produtos contêm glúten e podem conter traços de trigo, ovos, leite e soja. Bebidas alcoólicas: venda proibida para menores de 18 anos. Valores sujeitos a alteração sem aviso prévio; confirme o total no atendimento.</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Voltar ao topo" hidden>↑</button>
+
+<a class="wa-float" id="waFloat" target="_blank" rel="noopener" href="#" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff"><path d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2c1.8 1 3.800 1.500 5.600 1.500 7 0 12.600-5.600 12.600-12.500S23 3 16 3zm0 22.800c-1.800 0-3.500-.5-5-1.400l-.4-.2-4.400 1.200 1.200-4.300-.3-.4a10 10 0 0 1-1.500-5.300C5.600 9.900 10.300 5.300 16 5.300s10.400 4.600 10.400 10.300S21.700 25.800 16 25.800zm5.700-7.500c-.3-.2-1.800-.9-2.100-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100c-1.900-.9-3.100-1.700-4.300-3.800-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-.9-2.200c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1 1-1 2.400 1 2.800 1.200 3c.2.2 2.100 3.200 5.100 4.500 1.900.8 2.600.9 3.600.7.600-.1 1.800-.7 2.100-1.500s.3-1.400.2-1.500-.3-.2-.6-.3z"/></svg>
+</a>
+
+<div class="mini-cart" id="miniCart" hidden>
+  <button id="miniOpen" class="btn btn-red"><span id="miniCount">0 itens</span> · <b id="miniTotal">R$ 0,00</b> · Ver pedido</button>
+</div>
+
+<!-- Modal de produto -->
+<div class="overlay" id="overlay" hidden></div>
+<div class="modal" id="modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="mTitle" hidden>
+  <button class="x" id="mClose" aria-label="Fechar">×</button>
+  <h3 id="mTitle"></h3>
+  <p class="m-desc" id="mDesc"></p>
+  <div class="field"><label>Tamanho</label><div class="opts" id="mSizes"></div></div>
+  <div class="field" id="mHalfBox">
+    <label class="check"><input type="checkbox" id="mHalf"> Meia a meia (2 sabores)</label>
+    <select id="mSecond" hidden aria-label="Segundo sabor"></select>
+    <small class="hint" id="mHalfHint" hidden>Será cobrado o valor do sabor mais caro.</small>
+  </div>
+  <div class="field" id="mBordaBox">
+    <label class="check"><input type="checkbox" id="mBorda"> Borda recheada</label>
+    <select id="mBordaSel" hidden aria-label="Sabor da borda"></select>
+  </div>
+  <div class="field"><label for="mObs">Observações (opcional)</label><input id="mObs" type="text" maxlength="120" placeholder="Ex.: sem cebola, bem passada..."></div>
+  <div class="m-foot">
+    <div class="qty"><button id="mMinus" aria-label="Diminuir">−</button><span id="mQty">1</span><button id="mPlus" aria-label="Aumentar">+</button></div>
+    <button class="btn btn-red" id="mAdd">Adicionar · <b id="mPrice"></b></button>
+  </div>
+</div>
+
+<!-- Carrinho -->
+<aside class="drawer" id="drawer" tabindex="-1" role="dialog" aria-modal="true" aria-label="Seu pedido" hidden>
+  <div class="drawer-head"><h3>Seu pedido</h3><button class="x" id="cClose" aria-label="Fechar">×</button></div>
+  <div class="drawer-body">
+    <div id="cartList"></div>
+    <p class="empty" id="cartEmpty">Seu carrinho está vazio. Escolha uma pizza no cardápio.</p>
+
+    <div id="checkout" hidden>
+      <h4>Dados do pedido</h4>
+      <div class="field"><label for="fNome">Seu nome *</label><input id="fNome" autocomplete="name"></div>
+      <div class="field"><label for="fTel">Telefone / WhatsApp *</label><input id="fTel" inputmode="tel" autocomplete="tel" placeholder="(44) 90000-0000"></div>
+      <div class="field"><label>Como deseja receber?</label>
+        <div class="opts" id="fTipo">
+          <button type="button" class="opt on" data-v="Entrega">🛵 Entrega</button>
+          <button type="button" class="opt" data-v="Retirada">🏪 Retirada</button>
+        </div>
+      </div>
+      <div id="addrBox">
+        <div class="field"><label for="fRua">Rua e número *</label><input id="fRua" autocomplete="street-address"></div>
+        <div class="row2">
+          <div class="field"><label for="fBairro">Bairro *</label><input id="fBairro"></div>
+          <div class="field"><label for="fComp">Complemento</label><input id="fComp"></div>
+        </div>
+        <div class="field"><label for="fRef">Ponto de referência</label><input id="fRef"></div>
+      </div>
+      <div class="field"><label for="fPag">Forma de pagamento *</label><select id="fPag"></select></div>
+      <div class="field" id="trocoBox" hidden><label for="fTroco">Troco para quanto?</label><input id="fTroco" inputmode="decimal" placeholder="Ex.: 100 (ou 'não preciso')"></div>
+      <div class="field"><label for="fObs">Observações do pedido</label><textarea id="fObs" rows="2" placeholder="Alergias, instruções para o entregador..."></textarea></div>
+    </div>
+  </div>
+  <div class="drawer-foot" id="cFoot" hidden>
+    <div class="tot"><span>Subtotal</span><b id="cSub">R$ 0,00</b></div>
+    <p class="note" id="cNote">Taxa de entrega informada no atendimento.</p>
+    <p class="warn" id="cWarn" hidden></p>
+    <button class="btn btn-green full" id="cSend">Enviar pedido pelo WhatsApp</button>
+    <button class="link" id="cClear">Limpar carrinho</button>
+  </div>
+</aside>
+
+<script src="config.js"></script>
+<script src="menu-data.js"></script>
+<script src="app.js" defer></script>
+</body>
+</html>
