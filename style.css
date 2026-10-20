@@ -299,3 +299,8 @@ details[open] p{animation:rise .3s}
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* correções */
+.hero-photo{height:auto}
+.hero-badge{height:auto;aspect-ratio:1}
+.brand img,.contact-logo{height:auto;aspect-ratio:1}
